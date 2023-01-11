@@ -1,11 +1,14 @@
-import express from "express";
-import cors from 'cors';
+const express = require('express');
+const cors = require('cors');
+
 
 class Server {
 
     constructor() {
         this.app = express();
         this.port = process.env.PORT;
+        this.server = require('http').createServer(this.app);
+        this.io = require('socket.io')(this.server);
 
         this.paths = {}
 
@@ -32,7 +35,7 @@ class Server {
     }
 
     listen(){
-        this.app.listen(this.port,() => {
+        this.server.listen(this.port,() => {
             console.log(`Escuchando en https:localHost:${this.port}`)
         })
         
@@ -40,4 +43,4 @@ class Server {
 
 }
 
-export{Server}
+module.exports = Server;
