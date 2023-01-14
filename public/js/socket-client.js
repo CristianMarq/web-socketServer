@@ -15,6 +15,10 @@ socket.on('disconnect', () => {
     lblOffline.style.display = '';
 });
 
+socket.on('enviar-mensaje', (payload) => {
+    console.log(payload);
+})
+
 btnEnviar.addEventListener('click', () => {
     const mesaje = txtMesaje.value;
     const payload = {
